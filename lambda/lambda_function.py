@@ -19,12 +19,7 @@ from ask_sdk_core.utils.predicate import (
     is_intent_name,
 )
 
-from ask_sdk_core.utils.request_util import (
-    get_intent_name,
-    get_slot,
-    get_slot_value,
-    get_account_linking_access_token
-)
+from ask_sdk_core.utils.request_util import get_intent_name, get_slot, get_slot_value, get_account_linking_access_token
 from ask_sdk_model.session_ended_reason import SessionEndedReason
 from ask_sdk_model.slu.entityresolution.status_code import StatusCode
 from urllib3 import HTTPResponse
@@ -48,7 +43,7 @@ from const import (
     SSL_VERIFY,
     DEBUG,
     AWS_DEFAULT_REGION,
-    ALL_PROXY
+    ALL_PROXY,
 )
 
 logger = logging.getLogger()
@@ -125,7 +120,7 @@ class HomeAssistant(Borg):
         self.aws_region = configuration[AWS_DEFAULT_REGION]
         self.proxy = configuration[ALL_PROXY]
         logger.setLevel(logging.INFO)
-        
+
         if self.debug:
             logger.setLevel(logging.DEBUG)
 
@@ -136,7 +131,7 @@ class HomeAssistant(Borg):
         # Define class vars
         self.ha_state = None
 
-        if(self.proxy is None):
+        if self.proxy is None:
             self.http = _init_http_pool(self.ssl_verify)
         else:
             logger.debug(f"Proxy is { self.proxy}")
@@ -682,7 +677,6 @@ class LocalizationInterceptor(AbstractRequestInterceptor):
         if locale in language_data:
             data.update(language_data[locale])
         handler_input.attributes_manager.request_attributes["_"] = data
-
 
 
 """
