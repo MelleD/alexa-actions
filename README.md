@@ -122,7 +122,6 @@ But you need to have a lot of traffic and updates. With testing and everything, 
 
 [release-badge]: https://img.shields.io/github/v/release/MelleD/alexa-actions?style=flat-square
 [downloads-badge]: https://img.shields.io/github/downloads/MelleD/alexa-actions/total?style=flat-square
-[build-badge]: https://img.shields.io/github/actions/workflow/status/MelleD/alexa-actions/actions/workflows/build-linux.yml?branch=main&style=flat-square
 [build-badge]: https://img.shields.io/github/actions/workflow/status/MelleD/alexa-action/build-linux.yml?branch=main&style=flat-square
 
 <!-- References -->
