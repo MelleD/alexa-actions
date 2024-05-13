@@ -22,9 +22,6 @@ Please ⭐️ or sponsor this repo when you like it :heart:.
 
 Also thanks to the amazing [Tailscale](https://www.home-assistant.io/integrations/tailscale/)integrations!
 
-## Getting started
-
-
 ## Installation
 
 ### Getting started
@@ -37,12 +34,12 @@ Here are some steps you need to take. Since this guide is fairly new, please cre
 The premise is that  [Tailscale](https://www.home-assistant.io/integrations/tailscale/) Integration is installed in HA and the HA instance is available as a node.
 
 1. The Git repo must be forked so that the Docker image for the AWS Lambda can be pushed to your private repository in the Amazon Elastic Container Registry.
-1. Create a private repository on AWS [Amazon Elastic Container Registry](https://aws.amazon.com/de/ecr/). The name must be _ha-custom-lambda-tailscale_ for the repo
+2. Create a private repository on AWS [Amazon Elastic Container Registry](https://aws.amazon.com/de/ecr/). The name must be _ha-custom-lambda-tailscale_ for the repo
 <img alt="ecr-private" src="https://github.com/MelleD/alexa-actions/blob/main/docs/images/ecr_private.png">
 
 See for more information [AWS Introduction ECR] (https://aws.amazon.com/de/ecr/getting-started/)
 
-1. Create a keypair on AWS Identity Management (IM) to allow github action to push the Docker image to ECR.
+3. Create a keypair on AWS Identity Management (IM) to allow github action to push the Docker image to ECR.
 Create AWS_ACCESS_KEY_ID_ and _AWS_SECRET_ACCESS_KEY_
 <img alt="Zugriff Schlüssel" src="https://github.com/MelleD/alexa-actions/blob/main/docs/images/zugriff_key.png">
 
@@ -50,10 +47,10 @@ See for more information [AWS Introduction credentials] (https://docs.aws.amazon
 
 Remember both carefully because the secret is only displayed once and is required in the next step.
 
-1. Go to your forked repo under settings. Go to secrets and variables. Create two new secrets with _AWS_ACCESS_KEY_ID_ and _AWS_SECRET_ACCESS_KEY_ from the previous step
+4. Go to your forked repo under settings. Go to secrets and variables. Create two new secrets with _AWS_ACCESS_KEY_ID_ and _AWS_SECRET_ACCESS_KEY_ from the previous step
 <img alt="github secret" src="https://github.com/MelleD/alexa-actions/blob/main/docs/images/github_secret.png">
 
-1. Then build and push the Docker image under Github Actions. To do this, run ```.github/workflows/docker-build-push.yml```
+5. Then build and push the Docker image under Github Actions. To do this, run ```.github/workflows/docker-build-push.yml```
 <img alt="githubaction" src="https://github.com/MelleD/alexa-actions/blob/main/docs/images/githubaction.png">
 
 
@@ -66,28 +63,28 @@ Remember both carefully because the secret is only displayed once and is require
 
 See for more information [AWS Lambda] (https://docs.aws.amazon.com/de_de/lambda/latest/dg/getting-started.html)
 
-1. Name the function alexa-actionable-notifications-function and select the Docker image from the ECR and click create function
+2. Name the function alexa-actionable-notifications-function and select the Docker image from the ECR and click create function
 <img alt="Select Container Lambda" src="https://github.com/MelleD/alexa-actions/blob/main/docs/images/select_container_lambda.png"> 
 
 <img alt="Create Lambda" src="https://github.com/MelleD/alexa-actions/blob/main/docs/images/create_lambda.png"> 
 <img alt="Overview Lambda" src="https://github.com/MelleD/alexa-actions/blob/main/docs/images/overview_lambda.png"> 
 
 
-1. Click "Add Trigger" and copy your skill id from the previous step from the [Skill](https://developer.amazon.com/alexa/console/ask)
+3. Click "Add Trigger" and copy your skill id from the previous step from the [Skill](https://developer.amazon.com/alexa/console/ask)
 
 <img alt="Lambda Alexa Skill" src="https://github.com/MelleD/alexa-actions/blob/main/docs/images/lambda_alexa_skill.png"> 
 <img alt="Trigger" src="https://github.com/MelleD/alexa-actions/blob/main/docs/images/trigger.png"> 
 
 
-1. Now we have to log in to our Tailscale account and create an ephemeral key. Go to settings --> key
+4. Now we have to log in to our Tailscale account and create an ephemeral key. Go to settings --> key
 <img alt="Key" src="https://github.com/MelleD/alexa-actions/blob/main/docs/images/key.png"> 
 
 <img alt="Key1" src="https://github.com/MelleD/alexa-actions/blob/main/docs/images/key1.png"> 
 Please remember the key. You currently have to do this step every 3 months because the key can no longer be created.
 
-1. An HA long-living token (10 years) must then be created that Lambda can access to your HA-Instance, which is only available into your VPN. Please remember the key.
+5. An HA long-living token (10 years) must then be created that Lambda can access to your HA-Instance, which is only available into your VPN. Please remember the key.
 
-1. Now the following ENV variables must be inserted into the function.
+6. Now the following ENV variables must be inserted into the function.
 <img alt="Key1" src="https://github.com/MelleD/alexa-actions/blob/main/docs/images/ha_env.png"> 
 
 
@@ -98,7 +95,7 @@ Please remember the key. You currently have to do this step every 3 months becau
 | HA_URL                    | string   |               |**Important the TAILSCALE ip from HA** e.g http://{tailscale-ha-ip}:8123. Should be start with 100.xxx.xxx.xxx TAILSCALE_AUTHKEY the ephemeral key. Should be start with tskey-auth-xxxxx          |
 
 
-1. Save function to deploy the function new
+7. Save function to deploy the function new
 
 Now the Alexa skill can be tested and integrated into HA. These are the same steps like in the [wiki](https://github.com/keatontaylor/alexa-actions/wiki/Alexa-Talking-to-Home-Assistant-(The-Skill))
 
@@ -125,7 +122,7 @@ But you need to have a lot of traffic and updates. With testing and everything, 
 
 [release-badge]: https://img.shields.io/github/v/release/MelleD/alexa-actions?style=flat-square
 [downloads-badge]: https://img.shields.io/github/downloads/MelleD/alexa-actions/total?style=flat-square
-[build-badge]: https://img.shields.io/github/actions/workflow/status/MelleD/alexa-actions/build-linux.yml?branch=main&style=flat-square
+[build-badge]: https://img.shields.io/github/actions/workflow/status/MelleD/alexa-actions/actions/workflows/build-linux.yml?branch=main&style=flat-square
 
 <!-- References -->
 
